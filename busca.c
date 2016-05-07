@@ -53,13 +53,8 @@ FILE* get_file_pointer(char* file_name) {
 	return file_pointer;
 }
 
-//------------ METODO PRINCIPAL --------------
-int main(int argc, char *argv[]) {
-
-	int SIZE = 100;
-
-	// criando a variável ponteiro para o arquivo
-	FILE *file_pointer = get_file_pointer(argv[1]);
+void show_all_elements(FILE* file_pointer) {
+	int SIZE = 100;	
 	char line[SIZE];
 
 	// enquanto não for fim de arquivo o looping será executado
@@ -69,6 +64,15 @@ int main(int argc, char *argv[]) {
 
 	// fechando arquivo
 	fclose(file_pointer);
+}
+
+//------------ METODO PRINCIPAL --------------
+int main(int argc, char *argv[]) {
+
+	// criando a variável ponteiro para o arquivo
+	FILE* file_pointer = get_file_pointer(argv[1]);
+
+	show_all_elements(file_pointer);
 
 	return 0;
 }

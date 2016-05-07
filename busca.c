@@ -1,13 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 // realiza a busca linear(ou sequencial)
 int linear_search(int* vector, int vector_size, int value) {
-
+	int count = 0;
+	
 	int i;
 	for (i = 0; i < vector_size; i++) {
-
+		count++;
 		if(vector[i] == value) {
+			printf("Numero de comparacoes: %d\n", count);
 			return i;
 		}
 	}
@@ -17,15 +20,18 @@ int linear_search(int* vector, int vector_size, int value) {
 
 // realiza a busca binária
 int binary_search(int* vector, int vector_size, int value) {
+	int count = 0;
 
 	int low = 0, high = vector_size-1, mid;
     while(low <= high) {
+    	count++;
 
         mid = (low + high)/2;
         if(vector[mid] < value) {
             low = mid + 1;
         }
         else if(vector[mid] == value) {
+        	printf("Numero de comparacoes: %d\n", count);
             return mid;
         }
         else if(vector[mid] > value) {
@@ -109,8 +115,8 @@ int main(int argc, char *argv[]) {
 	read_vector(vector, vector_size, file);
 
 	// resultados da busca binária
-	int position = binary_search(vector, vector_size, value);
 	printf("------ Busca binaria ------\n");
+	int position = binary_search(vector, vector_size, value);
 	if(position != -1) {
 		printf("Posicao encontrada: %d\n", position);
 	}
@@ -119,14 +125,17 @@ int main(int argc, char *argv[]) {
 	}
 
 	// resultados da busca sequencial
-	position = linear_search(vector, vector_size, value);
 	printf("------ Busca sequencial ------\n");
+	position = linear_search(vector, vector_size, value);
 	if(position != -1) {
 		printf("Posicao encontrada: %d\n", position);
 	}
 	else {
 		printf("Não foi encontrado!\n");
 	}
+
+	// mostra os elementos do vetor
+	print_vector(vector, vector_size);
 
 	free(vector);
 	fclose(file);	

@@ -68,11 +68,20 @@ void show_all_elements(FILE* file_pointer) {
 
 //------------ METODO PRINCIPAL --------------
 int main(int argc, char *argv[]) {
+	int SIZE = 100;
+	char line[SIZE];
+	int value, vector_size;
 
 	// criando a variável ponteiro para o arquivo
-	FILE* file_pointer = get_file_pointer(argv[1]);
+	FILE* file = get_file_pointer(argv[1]);
 
-	show_all_elements(file_pointer);
+	fscanf(file, "%d\n", &value);
+	fscanf(file, "%d\n", &vector_size);
+	
+	printf("Valor buscado: %d Tamanho do vetor: %d\n", value, vector_size);
+
+	//show_all_elements(file_pointer);
+	fclose(file);	
 
 	return 0;
 }

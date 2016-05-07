@@ -134,11 +134,14 @@ int main(int argc, char *argv[]) {
 		printf("Não foi encontrado!\n");
 	}
 
-	// mostra os elementos do vetor
-	print_vector(vector, vector_size);
+	//mostra os elementos do arquivo
+	//show_all_elements(file);
 
-	free(vector);
-	fclose(file);	
+	// mostra os elementos do vetor
+	//print_vector(vector, vector_size);
+
+	free(vector); // desaloca da memoria
+	fclose(file); // fecha o arquivo	 
 
 	return 0;
 }

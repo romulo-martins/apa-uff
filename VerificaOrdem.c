@@ -40,7 +40,13 @@ int* create_vector(int size) {
 	return vector;
 }
 
-
+// lê o vetor do arquivo
+void read_vector(int* vector, int vector_size, FILE* file) {
+	int i;
+	for (i = 0; i < vector_size; ++i) {
+		fscanf(file, "%d ", &vector[i]);
+	}
+}
 
 
 int main(int argc, char** argv) {
@@ -63,11 +69,15 @@ int main(int argc, char** argv) {
         file = get_file_pointer(arq[i]);
         fscanf(file, "%d\n", &element);
 	fscanf(file, "%d\n", &size);
+        
+        
         int *aux = create_vector(size);
+        read_vector(aux,size,file);
         int j;
         for (j = 0; j < size-2; j++) {
 	    if(aux[j]>aux[j+1]){
                 printf("Vetor não ordenado: %s", arq[i]);
+                break;
             }    
         }
         fclose(file);

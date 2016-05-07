@@ -96,7 +96,10 @@ int main(int argc, char *argv[]) {
 	int value, vector_size;
 
 	// criando a variável ponteiro para o arquivo
+/*
 	FILE* file = get_file_pointer(argv[1]);
+*/
+	FILE* file = get_file_pointer("testes/Teste1.txt");
 
 	// lê o valor a ser buscado e o tamanho do vetor do arquivo
 	fscanf(file, "%d\n", &value);

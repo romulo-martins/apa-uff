@@ -121,7 +121,7 @@ int main(int argc, char *argv[]) {
 		printf("Posicao encontrada: %d\n", position);
 	}
 	else {
-		printf("Não foi encontrado!\n");
+		printf("Nao foi encontrado!\n");
 	}
 
 	// resultados da busca sequencial
@@ -131,7 +131,7 @@ int main(int argc, char *argv[]) {
 		printf("Posicao encontrada: %d\n", position);
 	}
 	else {
-		printf("Não foi encontrado!\n");
+		printf("Nao foi encontrado!\n");
 	}
 
 	//mostra os elementos do arquivo

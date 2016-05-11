@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
 // realiza a busca linear(ou sequencial)
 int linear_search(int* vector, int vector_size, int value) {
@@ -58,20 +57,6 @@ FILE* get_file_pointer(char* file_name) {
 	return file_pointer;
 }
 
-// função que exibe todos os elementos do arquivo
-void show_all_elements(FILE* file_pointer) {
-	int SIZE = 100;	
-	char line[SIZE];
-
-	// enquanto não for fim de arquivo o looping será executado
-	while(fgets(line, SIZE, file_pointer) != NULL) {
-		printf("%s", line);
-	}
-
-	// fechando arquivo
-	fclose(file_pointer);
-}
-
 // aloca um vetor do tamanho passado por parametro
 int* create_vector(int size) {
 	int* vector = (int*)malloc(size*sizeof(int));
@@ -114,19 +99,9 @@ int main(int argc, char *argv[]) {
 	// lê os dados do arquivo
 	read_vector(vector, vector_size, file);
 
-	// resultados da busca binária
-	printf("------ Busca binaria ------\n");
-	int position = binary_search(vector, vector_size, value);
-	if(position != -1) {
-		printf("Posicao encontrada: %d\n", position);
-	}
-	else {
-		printf("Nao foi encontrado!\n");
-	}
-
 	// resultados da busca sequencial
-	printf("------ Busca sequencial ------\n");
-	position = linear_search(vector, vector_size, value);
+	printf("\n------ BUSCA SEQUENCIAL ------\n");
+	int position = linear_search(vector, vector_size, value);
 	if(position != -1) {
 		printf("Posicao encontrada: %d\n", position);
 	}
@@ -134,8 +109,17 @@ int main(int argc, char *argv[]) {
 		printf("Nao foi encontrado!\n");
 	}
 
-	//mostra os elementos do arquivo
-	//show_all_elements(file);
+	// resultados da busca binária
+	printf("\n------ BUSCA BINARIA ------\n");
+	position = binary_search(vector, vector_size, value);
+	if(position != -1) {
+		printf("Posicao encontrada: %d\n", position);
+	}
+	else {
+		printf("Nao foi encontrado!\n");
+	}
+
+	printf("\n");
 
 	// mostra os elementos do vetor
 	//print_vector(vector, vector_size);

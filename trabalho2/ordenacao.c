@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+ 
 // função que lê os dados do array
 void read_array(int* array, int array_size) {
 	int i;
@@ -23,6 +24,16 @@ void show_array(int* array, int array_size) {
 int* create_array(int size) {
 	int* array = (int*)malloc(size*sizeof(int));
 	return array;
+}
+
+// faz uma cópia do array passado por parametro
+int* copy_array(int* array , int array_size) {
+	int* temp = create_array(array_size);
+	int i;
+	for(i = 0; i < array_size; i++) {
+		temp[i] = array[i];
+	}
+	return temp;
 }
 
 // função auxiliar para interlacar os vetores
@@ -90,44 +101,61 @@ void insertion_sort(int* array, int array_size) {
 	}
 }
 
-
-int main() {
-
-	clock_t start_time, end_time;
-	int array_size;	 
+void execute_analisys_insertion_sort(int* array, int array_size) {
+	clock_t start_time, end_time; // variaveis para a contagem do tempo	 
 	double total_time;
-
-	//lê o tamanho do array
-	scanf("%d", &array_size);
-	//cria o vetor
-	int array[array_size];
-	// lê os dados do array
-	read_array(array, array_size);
-
-	//--------------- INSERTION SORT--------------
-
-	// // faz a análise do tempo gasto
-	// start_time = clock();
-	// insertion_sort(array, array_size); // executa o algoritmo insertion sort
-	// end_time = clock();
-
-	// // calcula o tempo total gasto
-	// total_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
-
-	// printf("Tempo gasto pelo algoritmo Insertion Sort %f\n", total_time);
-
-
-	//-------------- MERGE SORT ------------------
 
 	// faz a análise do tempo gasto
 	start_time = clock();
-	merge_sort(array, array_size); // executa o algoritmo insertion sort
+	insertion_sort(array, array_size); // executa o algoritmo insertion sort
 	end_time = clock();
 
 	// calcula o tempo total gasto
 	total_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+	printf("----- Insertion Sort -----\n");
+	printf("Tempo gasto: %f\n", total_time);
+	// show_array(array, array_size);
 
-	printf("Tempo gasto pelo algoritmo Merge Sort %f\n", total_time);
+}
+
+void execute_analisys_merge_sort(int* array, int array_size) {
+	clock_t start_time, end_time; // variaveis para a contagem do tempo	 
+	double total_time;
+
+	// faz a análise do tempo gasto
+	start_time = clock();
+	merge_sort(array, array_size); // executa o algoritmo merge sort
+	end_time = clock();
+
+	// calcula o tempo total gasto
+	total_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+	printf("----- Merge Sort -----\n");
+	printf("Tempo gasto: %f\n", total_time);
+	//show_array(array, array_size);	
+}
+ 
+
+int main() {
+
+	int array_size;
+	scanf("%d", &array_size); //lê o tamanho do array
+
+	// cria o array
+	int* array = create_array(array_size);
+
+	// lê os dados do array
+	read_array(array, array_size);
+
+	int* array_2 = copy_array(array, array_size); // faz uma cópia do array lido
+
+	// faz a execução do algoritmo insertion sort e verifica o tempo gasto
+	execute_analisys_insertion_sort(array, array_size);
+
+	// faz a execução do algoritmo merge sort e verifica o tempo gasto
+	execute_analisys_merge_sort(array_2, array_size);
+
+	free(array);
+	free(array_2);
 
 	return 0;
 }

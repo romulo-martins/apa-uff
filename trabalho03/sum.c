@@ -7,6 +7,7 @@ int* create_array(int array_size) {
 	return array;
 }
 
+
 void read_array(int* array, int array_size) {
 	int i;
 	for(i = 0; i < array_size; i++) {
@@ -14,18 +15,21 @@ void read_array(int* array, int array_size) {
 	}
 }
 
-void show_array(int* array, int array_size) {
-	int i;
-	for (i = 0; i < array_size; ++i) {
-		printf(" %d ", array[i]);
-	}
-	printf("\n");
+
+void show_result(char* message, int max_sum, int start, int end, long count) {
+	printf("------ %s -----\n", message);
+	printf("Maior soma: %d\n", max_sum);
+	printf("O inicio é : %d\n", start);
+	printf("O fim é : %d\n", end);
+	printf("Numero de operaçoes: %ld\n", count);
 }
+
 
 void max_sum_by_brute_force(int* array, int array_size) {
 	int i, j;
-	int start = 0, end = -1; 
+	int start, end; 
 	int sum, max_sum = 0;
+	long count = 0;
 
 	for(i = 0; i < array_size; i++) {
 		sum = 0;
@@ -36,38 +40,33 @@ void max_sum_by_brute_force(int* array, int array_size) {
 				start = i;
 				end = j;
 			}
-		}
-
+			count++;
+		}		
 	}
-
-	printf("------ Forca Bruta -----\n");
-	printf("Maior soma: %d\n", max_sum);
-	printf("O inicio é : %d\n", start);
-	printf("O fim é : %d\n", end);
+	show_result("Forca Bruta", max_sum, start, end, count);
 }
+
 
 void max_sum_by_kadane(int* array, int array_size) {
 	int i, j;
 	int start = 0, end = -1;
 	int sum = 0, max_sum = 0;
+	long count = 0;
 
 	for (j = 0; j < array_size; j++) {
 		sum += array[j]; 
-		if (sum < 0) {
-			i = j + 1;
-			sum = 0;
-		}
 		if(sum > max_sum) {
 			max_sum = sum;
 			start = i;
 			end = j;
 		}
+		if (sum < 0) {
+			sum = 0;
+			i = j + 1;			
+		}
+		count++;
 	}
-
-	printf("----- Kadane -----\n");
-	printf("Maior soma: %d\n", max_sum);
-	printf("O inicio é : %d\n", start);
-	printf("O fim é : %d\n", end);	
+	show_result("Kadane", max_sum, start, end, count);
 }
 
 

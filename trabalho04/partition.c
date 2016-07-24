@@ -28,7 +28,7 @@ void merge(int *A, int a, int *B, int b, int *C) {
 	i = j = k = 0;
 
 	while (i < a && j < b) {
-		if (A[i] <= B[j]) {
+		if (A[i] >= B[j]) {
 			C[k++] = A[i++];
 		}
 		else {
@@ -108,6 +108,6 @@ int main() {
 
 	partition_guloso(array, array_size);
 
-
+	free(array);
 	return 0;
 }

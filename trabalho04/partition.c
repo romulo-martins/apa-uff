@@ -94,23 +94,49 @@ void merge_sort(int* array, int array_size) {
 }
 
 void partition_guloso(int* array, int array_size) {
-	int sum_A = 0, sum_B = 0;
+	int sum_A = 0, sum_B = 0, i;
 	long count = 0;
+	int* partition_A = (int*)malloc(array_size*sizeof(int));
+	int* partition_B = (int*)malloc(array_size*sizeof(int));
+	int pos_A = 0, pos_B = 0;
 
-	int i;	
-	for (i = 0; i < array_size; i++) {
+	for (i = 0; i < array_size; i++)
+	{
 		if (sum_A <= sum_B)
 		{
-			sum_A += array[i];
+			partition_A[pos_A] = array[i];
+			sum_A += partition_A[pos_A];
+			pos_A++;
 		}
 		else {
-			sum_B += array[i];
-
+			partition_B[pos_B] = array[i];
+			sum_B += partition_B[pos_B];
+			pos_B++;
 		}
 		count++;
 	}
 
 	show_result("Resultado", sum_A, sum_B, count);
+
+	printf("Particao A:\n[");
+	for ( i = 0; i < pos_A; i++)
+	{
+		printf("%d ", partition_A[i]);
+	}
+	printf("]\n");
+
+	printf("Particao B:\n[");
+	for (i = 0; i < pos_B; i++)
+	{
+		printf("%d ", partition_B[i]);
+	}
+	printf("]\n");
+
+
+
+
+	free(partition_A);
+	free(partition_B);
 }
 
 // acha a soma total do vetor de inteiros 
@@ -128,8 +154,6 @@ void dinamic_program(int* array, int array_size) {
 	int k = total_sum(array, array_size);
 	int n = array_size;
 	int** m = create_matrix(k/2, n);
-
-	
 
 	destroy_matrix(m, k/2, n);
 }

@@ -83,6 +83,8 @@ int main() {
 
 	// executa o algoritmo de Kadane
 	max_sum_by_kadane(array, array_size);
+	
+	free(array);
 
 	return 0;
 }

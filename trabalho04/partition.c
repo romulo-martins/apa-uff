@@ -1,12 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// aloca um array
 int* create_array(int array_size) {
 	int* array = (int*)malloc(array_size * sizeof(int));
 	return array;
 }
 
+// aloca uma matriz
+int** create_matrix(int rows, int columns){ 
+	int i;	 
+	int **matrix = (int**)malloc(rows * sizeof(int*));	 
+	for (i = 0; i < rows; i++){ 
+	    matrix[i] = (int*) malloc(columns * sizeof(int));
+	}
+	return matrix; 
+}
 
+// desaloca uma matriz
+void destroy_matrix(int** matrix, int rows, int columns) {
+	int i;
+	for (i = 0; i < rows; i++) {
+		free(matrix[i]);		
+	}
+	free(matrix);
+}
+
+// o vetor(array) de inteiros
 void read_array(int* array, int array_size) {
 	int i;
 	for (i = 0; i < array_size; i++) {
@@ -77,8 +97,8 @@ void partition_guloso(int* array, int array_size) {
 	int sum_A = 0, sum_B = 0;
 	long count = 0;
 
-	for (int i = 0; i < array_size; i++)
-	{
+	int i;	
+	for (i = 0; i < array_size; i++) {
 		if (sum_A <= sum_B)
 		{
 			sum_A += array[i];
@@ -91,14 +111,32 @@ void partition_guloso(int* array, int array_size) {
 	}
 
 	show_result("Resultado", sum_A, sum_B, count);
-
-
 }
 
+// acha a soma total do vetor de inteiros 
+int total_sum(int* array, int array_size) {
+	int i;
+	int sum = 0;
+	for(i = 0; i < array_size; i++) {
+		sum += array[i];
+	}
+	return sum;
+}
+
+void dinamic_program(int* array, int array_size) {
+
+	int k = total_sum(array, array_size);
+	int n = array_size;
+	int** m = create_matrix(k/2, n);
+
+	
+
+	destroy_matrix(m, k/2, n);
+}
 
 int main() {
 
-	int array_size;
+	int array_size; // n
 	scanf("%d", &array_size);
 
 	int* array = create_array(array_size);
@@ -107,6 +145,8 @@ int main() {
 	merge_sort(array, array_size);
 
 	partition_guloso(array, array_size);
+
+	printf("A soma total: %d\n", total_sum(array, array_size));
 
 	free(array);
 	return 0;
